@@ -5,14 +5,12 @@ import { listCartShippingMethods } from "@lib/data/fulfillment";
 import { listCartPaymentMethods } from "@lib/data/payment";
 import { HttpTypes } from "@medusajs/types";
 import Addresses from "@modules/checkout/components/addresses";
-import Payment from "@modules/checkout/components/payment";
-import Review from "@modules/checkout/components/review";
-import Shipping from "@modules/checkout/components/shipping";
-import StripePayment from "@modules/checkout/components/stripe";
-import StripePaymentSubs from "@modules/checkout/components/stripe-subs";
-import StripeReview from "@modules/checkout/components/stripe-review"; // review componenet for one-time payments
-import StripeReviewSubs from "@modules/checkout/components/stripe-review-subs"; // review component for subscriptions
+//import Payment from "@modules/checkout/components/payment";
+//import Review from "@modules/checkout/components/review";
 
+import Shipping from "@modules/checkout/components/shipping";
+import StripePaymentSubs from "@modules/checkout/components/stripe-subs"; // payment component for stripe subscriptions
+import StripeReviewSubs from "@modules/checkout/components/stripe-review-subs"; // review component for subscriptions
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 
@@ -57,7 +55,6 @@ export default function CheckoutForm({
 
       <Elements stripe={stripePromise}>
         <StripePaymentSubs cart={cart} availablePaymentMethods={paymentMethods} />
-        {/* <StripePayment cart={cart} availablePaymentMethods={paymentMethods} /> */}
         <StripeReviewSubs cart={cart} />
         {/* <StripeReview cart={cart} /> */}
       </Elements>
