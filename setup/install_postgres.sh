@@ -33,7 +33,7 @@ psql -U $CURRENT_USER -d stripe-ws-db -c '\q'
 npx medusa user -e admin@medusa-test.com -p supersecret
 
 # 4. rename .env.template to .env
-[ -f .env.template ] && mv .env.template .env && echo "Renamed .env.template to .env" || echo "No .env.template found"
+[ -f ./workshop/medusa-backend/.env.template ] && mv ./workshop/medusa-backend/.env.template ./workshop/medusa-backend/.env && echo "Renamed .env.template to .env" || echo "No .env.template found in ./workshop/medusa-backend/"
 
 #5 Run dev server
 cd ./workshop/medusa-backend/
