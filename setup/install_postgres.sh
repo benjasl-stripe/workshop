@@ -20,18 +20,22 @@ psql --version
 CURRENT_USER=$(whoami)
 
 # Create blank database
-createdb my-medusa-store-$CURRENT_USER
+createdb stripe-ws-db
 
 # Copy backup DB database
-psql -U $CURRENT_USER -d my-medusa-store-$CURRENT_USER -f ./medusa_dump.sql
+psql -U $CURRENT_USER -d stripe-ws-db -f ./workshop/setup/medusa_dump.sql -c '\q'
 
 
 # 3. Get the current username (non-interactively)
-psql -U $CURRENT_USER -d my-medusa-store-$CURRENT_USER -c '\q'
+psql -U $CURRENT_USER -d stripe-ws-db -c '\q'
 
 # 3. Create admin user
 npx medusa user -e admin@medusa-test.com -p supersecret
 
-#pwd
-#4 Run dev server
+# 4. rename .env.template to .env
+[ -f .env.template ] && mv .env.template .env && echo "Renamed .env.template to .env" || echo "No .env.template found"
+
+#5 Run dev server
+cd ./workshop/medusa-backend/
+npm install
 npm run dev
