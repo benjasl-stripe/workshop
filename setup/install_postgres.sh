@@ -30,7 +30,7 @@ psql -U $CURRENT_USER -d stripe-ws-db -f ./workshop/setup/medusa_dump.sql -c '\q
 psql -U $CURRENT_USER -d stripe-ws-db -c '\q'
 
 # 3. Create admin user
-npx medusa user -e admin@medusa-test.com -p supersecret
+npx medusa user -e admin@medusajs.com -p supersecret
 
 # 4. rename .env.template to .env
 [ -f ./workshop/medusa-backend/.env.template ] && mv ./workshop/medusa-backend/.env.template ./workshop/medusa-backend/.env && echo "Renamed .env.template to .env" || echo "No .env.template found in ./workshop/medusa-backend/"
