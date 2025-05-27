@@ -11,13 +11,18 @@ import {
   getCacheTag,
   getCartId,
   removeAuthToken,
+  removeCartId,
   setAuthToken,
 } from "./cookies"
 
 export const retrieveCustomer =
   async (): Promise<HttpTypes.StoreCustomer | null> => {
+    const authHeaders = await getAuthHeaders()
+
+    if (!authHeaders) return null
+
     const headers = {
-      ...(await getAuthHeaders()),
+      ...authHeaders,
     }
 
     const next = {
@@ -124,9 +129,17 @@ export async function login(_currentState: unknown, formData: FormData) {
 
 export async function signout(countryCode: string) {
   await sdk.auth.logout()
-  removeAuthToken()
-  revalidateTag("auth")
-  revalidateTag("customer")
+
+  await removeAuthToken()
+
+  const customerCacheTag = await getCacheTag("customers")
+  revalidateTag(customerCacheTag)
+
+  await removeCartId()
+
+  const cartCacheTag = await getCacheTag("carts")
+  revalidateTag(cartCacheTag)
+
   redirect(`/${countryCode}/account`)
 }
 
@@ -141,7 +154,8 @@ export async function transferCart() {
 
   await sdk.store.cart.transferCart(cartId, {}, headers)
 
-  revalidateTag("cart")
+  const cartCacheTag = await getCacheTag("carts")
+  revalidateTag(cartCacheTag)
 }
 
 export const addCustomerAddress = async (

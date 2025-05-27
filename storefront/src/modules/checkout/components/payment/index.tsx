@@ -154,7 +154,6 @@ const Payment = ({
                         setCardComplete={setCardComplete}
                       />
                     ) : (
-                      
                       <PaymentContainer
                         paymentInfoMap={paymentInfoMap}
                         paymentProviderId={paymentMethod.id}
@@ -170,7 +169,7 @@ const Payment = ({
           {paidByGiftcard && (
             <div className="flex flex-col w-1/3">
               <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                Payment method 
+                Payment method
               </Text>
               <Text
                 className="txt-medium text-ui-fg-subtle"

@@ -14,10 +14,6 @@ export const paymentInfoMap: Record<
     title: "Credit card",
     icon: <CreditCard />,
   },
-  "pp_bens-payment_bens-payment": {
-    title: "Credit card",
-    icon: <CreditCard />,
-  },
   "pp_stripe-ideal_stripe": {
     title: "iDeal",
     icon: <Ideal />,
