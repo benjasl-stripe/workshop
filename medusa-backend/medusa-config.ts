@@ -10,15 +10,7 @@ module.exports = defineConfig({
       resolve: "@medusajs/medusa/payment",
       options: {
         providers: [
-          {
-            resolve: "./src/modules/bens-payment",
-            id: "bens-payment",
-            options: {
-              // provider options...
-              apiKey: "...",
-              capture: true,
-            }
-          }
+         
         ]
       }
     }
