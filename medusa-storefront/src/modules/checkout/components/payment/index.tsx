@@ -24,37 +24,31 @@ const Payment = ({
     (paymentSession: any) => paymentSession.status === "pending"
   );
 
-/*   const useOptions: StripeCardElementOptions = useMemo(() => {
-    return {
-      classes: {
-        base: "pt-3 pb-3 px-4 border border-ui-border rounded-md focus:border-ui-fg-interactive focus:outline-none",
-      },
-    };
-  }, []); */
+  // const useOptions: StripeCardElementOptions = useMemo(() => {
+  //   return {
+  //     classes: {
+  //       base: "pt-3 pb-3 px-4 border border-ui-border rounded-md focus:border-ui-fg-interactive focus:outline-none",
+  //     },
+  //   };
+  // }, []); 
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showCardInput, setShowCardInput] = useState(false);
   const [cardBrand, setCardBrand] = useState<string | null>(null);
   const [cardComplete, setCardComplete] = useState(false);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(
     activeSession?.provider_id ?? ""
   );
 
-
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
-
   const isOpen = searchParams.get("step") === "payment";
 
   const setPaymentMethod = async (method: string) => {
     setError(null);
-    console.log('cart',cart)
-    console.log(method)
     setSelectedPaymentMethod(method);
-    await initiatePaymentSession(cart, {
-        provider_id: method,
-      });
   };
 
 
@@ -105,10 +99,13 @@ const Payment = ({
             },
         }
 
+        console.log('customerDetails',customerDetails)
+
         await initiatePaymentSession(cart, {
           provider_id: selectedPaymentMethod,
           context:{
-            ...customerDetails
+            cart_id: cart.id,
+            ...customerDetails,
           }
         });
       }
@@ -181,10 +178,11 @@ const Payment = ({
             </>
           )}
 
-          {/* {
+          {
             <div className="mt-4">
+{/* 
 
-              {selectedPaymentMethod !== "pp_system_default" && (
+              {selectedPaymentMethod !== "pp_system_default" && activeSession && (
                 <CardElement
                   options={useOptions as StripeCardElementOptions}
                   onChange={(e) => {
@@ -194,10 +192,10 @@ const Payment = ({
                   }}
                 />
               )}
+ */}
+
             </div>
-          } */}
-
-
+          } 
           <ErrorMessage
             error={error}
             data-testid="payment-method-error-message"
