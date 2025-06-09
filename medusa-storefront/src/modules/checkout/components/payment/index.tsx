@@ -98,9 +98,7 @@ const Payment = ({
               phone: cart.billing_address.phone || undefined,
             },
         }
-
-        console.log('customerDetails',customerDetails)
-
+        // If the payment method is not the default system one, we initiate a new payment session
         await initiatePaymentSession(cart, {
           provider_id: selectedPaymentMethod,
           context:{

@@ -23,7 +23,7 @@ CURRENT_USER=$(whoami)
 createdb stripe-ws-db
 
 # Copy backup DB database
-psql -U $CURRENT_USER -d stripe-ws-db -f ./workshop/setup/medusa_dump.sql -c '\q'
+psql -U $CURRENT_USER -d stripe-ws-db -f ./workshop/setup/stripe-ws-db.sql -c '\q'
 
 
 # 3. Get the current username (non-interactively)
