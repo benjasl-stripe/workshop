@@ -22,9 +22,8 @@ CURRENT_USER=$(whoami)
 # Create blank database
 createdb stripe-ws-db
 
-# Copy backup DB database
-psql -U $CURRENT_USER -d stripe-ws-db -f ./workshop/setup/stripe-ws-db.sql -c '\q'
-
+# Import DB data
+psql -U $CURRENT_USER -d stripe-ws-db -f ./workshop/setup/stripe-ws-dump.sql -c '\q'
 
 # 3. Get the current username (non-interactively)
 psql -U $CURRENT_USER -d stripe-ws-db -c '\q'
