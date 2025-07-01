@@ -210,9 +210,9 @@ const Payment = ({
             }
             data-testid="submit-payment-button"
           >
-            {!activeSession 
-              ? "Enter card details"
-              : "Continue to review"}
+          {(selectedPaymentMethod === "pp_system_default" || activeSession)
+            ? "Continue to review"
+            : "Enter card details"}
           </Button>
         </div>
 
