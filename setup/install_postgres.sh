@@ -15,6 +15,10 @@ pg_ctl -D /usr/local/var/postgres start
 # Run Postgres service
 brew services start postgresql@14
 
+# Create myadmin Postgres role
+createuser myadmin --superuser || echo "Role 'myadmin' already exists"
+
+
 # Print Postgres version to verify installation
 psql --version
 CURRENT_USER=$(whoami)
