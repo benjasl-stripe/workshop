@@ -21,6 +21,10 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
+        protocol: "https",
+        hostname: "stripe-workshop-resources.s3.us-west-2.amazonaws.com",
+      },
+      {
         protocol: "http",
         hostname: "localhost",
       },
