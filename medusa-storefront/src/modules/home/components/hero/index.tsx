@@ -1,33 +1,48 @@
-import { Github } from "@medusajs/icons"
+import Image from "next/image"
 import { Button, Heading } from "@medusajs/ui"
+import Link from "next/link"
 
 const Hero = () => {
   return (
-    <div className="h-[75vh] w-full border-b border-ui-border-base relative bg-ui-bg-subtle">
-      <div className="absolute inset-0 z-10 flex flex-col justify-center items-center text-center small:p-32 gap-6">
+    <div className="relative h-[65vh] w-full overflow-hidden">
+      {/* Background Image */}
+      <Image
+        src="/hero.jpg"
+        layout="fill"
+        loading="eager"
+        priority={true}
+        quality={90}
+        objectFit="cover"
+        objectPosition="center 75%"
+        alt="homepage banner"
+        className="absolute inset-0"
+        draggable="false"
+      />
+      
+      {/* Semi-transparent overlay */}
+      <div className="absolute inset-0 bg-black/60 z-10"></div>
+      
+      {/* Content */}
+      <div className="relative z-20 flex flex-col justify-center items-center text-center h-full px-4 small:px-32 gap-6">
         <span>
           <Heading
             level="h1"
-            className="text-3xl leading-10 text-ui-fg-base font-normal"
+            className="text-5xl leading-10 text-white font-normal drop-shadow-lg"
           >
-            Ecommerce Starter Template
+            Scooter Rentals
           </Heading>
           <Heading
             level="h2"
-            className="text-3xl leading-10 text-ui-fg-subtle font-normal"
+            className="text-xl leading-10 text-gray-200 font-normal drop-shadow-md"
           >
-            Powered by Medusa and Next.js
+            See the world on two wheels
           </Heading>
         </span>
-        <a
-          href="https://github.com/medusajs/nextjs-starter-medusa"
-          target="_blank"
-        >
+        <Link href="/store">
           <Button variant="secondary">
-            View on GitHub
-            <Github />
+            Rent a Scooter
           </Button>
-        </a>
+        </Link>
       </div>
     </div>
   )
