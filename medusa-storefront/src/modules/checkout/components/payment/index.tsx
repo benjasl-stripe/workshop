@@ -11,7 +11,11 @@ import Divider from "@modules/common/components/divider";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState, useMemo } from "react";
 
-//import { CardElement,  StripeCardElementOptions } from "@stripe/react-stripe-js";
+
+// Module 3: Add Elements to Collect Card details 
+// import CardElement and StripeCardElementOptions from react-stripe-js";
+// Add workshop code below this line:
+
 
 const Payment = ({
   cart,
@@ -24,13 +28,11 @@ const Payment = ({
     (paymentSession: any) => paymentSession.status === "pending"
   );
 
-  // const useOptions: StripeCardElementOptions = useMemo(() => {
-  //   return {
-  //     classes: {
-  //       base: "pt-3 pb-3 px-4 border border-ui-border rounded-md focus:border-ui-fg-interactive focus:outline-none",
-  //     },
-  //   };
-  // }, []); 
+  
+  // Module 3: Add Elements to Collect Card details
+  // Construct the card element options
+  // add workshop code below this line
+
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -178,19 +180,10 @@ const Payment = ({
 
           {
             <div className="mt-4">
-{/* 
-
-              {selectedPaymentMethod !== "pp_system_default" && activeSession && (
-                <CardElement
-                  options={useOptions as StripeCardElementOptions}
-                  onChange={(e) => {
-                    setCardBrand(e.brand && e.brand.charAt(0).toUpperCase() + e.brand.slice(1));
-                    setError(e.error?.message || null);
-                    setCardComplete(e.complete);
-                  }}
-                />
-              )}
- */}
+              
+{/* // Module 3: Add Elements to Collect Card details
+`   // show the card input if the selected payment method is not the default system one, 
+    // Add the code below this line: */}
 
             </div>
           } 

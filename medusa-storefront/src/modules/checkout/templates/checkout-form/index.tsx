@@ -12,12 +12,15 @@ import Payment from "@modules/checkout/components/payment"; // payment component
 import Review from "@modules/checkout/components/review"; // review component for subscriptions
 
 
-//// add this import for stripe
-//import { loadStripe } from "@stripe/stripe-js";
-//import { Elements } from "@stripe/react-stripe-js";
+// Module 3: Add Elements to Collect Card details 
+// Import the stripe elements and Stripe libraries.
+// Add the code below this line:
 
-//// Load Stripe with your publishable key
-//const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY || "");
+
+// Module 3: Add Elements to Collect Card details 
+// Load Stripe with your publishable key. 
+// Add the code below this line:
+
 
 export default function CheckoutForm({
   cart,
@@ -55,13 +58,13 @@ export default function CheckoutForm({
 
       <Shipping cart={cart} availableShippingMethods={shippingMethods} />
       
-      {/* <Elements stripe={stripePromise}> */}
-    
-        <Payment cart={cart} availablePaymentMethods={paymentMethods} />
-        <Review cart={cart} />
-        
-      {/* </Elements>*/}
       
+      {/* Module 3: Add stripe Elements to collect card details. Replace thw code block below: */}
+
+       {/* <Elements stripe={stripePromise}> replace this entire line.*/}
+          <Payment cart={cart} availablePaymentMethods={paymentMethods} />
+          <Review cart={cart} />
+       {/* </Elements> replace this entire line. */}
   
     </div>
   );

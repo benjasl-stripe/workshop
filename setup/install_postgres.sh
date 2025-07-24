@@ -26,13 +26,13 @@ CURRENT_USER=$(whoami)
 createdb stripe-ws-db
 
 # Import DB data
-psql -U $CURRENT_USER -d stripe-ws-db -f ./workshop/setup/mydb_dump.sql -c '\q'
+psql -U $CURRENT_USER -d stripe-ws-db -f ./workshop/setup/stripe-ws-dump.sql -c '\q'
 
 # 3. Get the current username (non-interactively)
 psql -U $CURRENT_USER -d stripe-ws-db -c '\q'
 
 # 3. Create admin user
-npx medusa user -e admin@zipscoot.com -p supersecret
+npx medusa user -e admin@medusajs.com -p supersecret
 
 # 4. rename .env.template to .env
 [ -f ./workshop/medusa-backend/.env.template ] && mv ./workshop/medusa-backend/.env.template ./workshop/medusa-backend/.env && echo "Renamed .env.template to .env" || echo "No .env.template found in ./workshop/medusa-backend/"
