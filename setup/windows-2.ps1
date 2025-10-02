@@ -2,7 +2,7 @@
 
 # 1. Set PGPASSWORD for automated operations
 # $env:PGPASSWORD = "<paste_generated_password_here>"
-$env:PGPASSWORD = "8f4e43c2b81f443c9b0b649a00b669b2"
+$env:PGPASSWORD = "ec0ee603649449768360db25f783505e"
 
 # 2. Start PostgreSQL service
 refreshenv
