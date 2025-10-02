@@ -94,25 +94,42 @@ if (-not (Get-Command npm -ErrorAction SilentlyContinue)) {
 
 # 12. Create Medusa admin user and setup .env
 $medusaDir = "..\medusa-backend"
-if (Test-Path $medusaDir) {
-    Set-Location $medusaDir
+Set-Location $medusaDir
 
-    Write-Host "Creating Medusa admin user..."
-    npx medusa user -e admin@medusajs.com -p supersecret
+Write-Host "Creating Medusa admin user..."
+npx medusa user -e admin@medusajs.com -p supersecret
 
-    if (Test-Path ".env.template") {
-        Move-Item ".env.template" ".env" -Force
-        Write-Host "Renamed .env.template to .env"
-    } else {
-        Write-Host "No .env.template found in $medusaDir"
+if (Test-Path ".env.template") {
+    if (Test-Path ".env") {
+        Write-Host "Backing up existing .env -> .env.backup"
+        Move-Item ".env" ".env.backup" -Force
     }
-
-    # 13. Install npm dependencies and run dev server
-    npm install
-    npm run dev
+    Move-Item ".env.template" ".env" -Force
+    Write-Host "Renamed .env.template to .env"
 } else {
-    Write-Host "Medusa backend directory not found: $medusaDir"
+    Write-Host "No .env.template found in $medusaDir"
 }
 
+# 13. Install npm dependencies (do not start dev server)
+Write-Host "Installing npm dependencies..."
+npm install
+
+# 13. Install npm dependencies (do not start dev server)
+npm install
+
+$here = (Resolve-Path .).Path
+
+Write-Host ''
+Write-Host '=========================================' -ForegroundColor Green
+Write-Host 'Installation complete - everything is ready.' -ForegroundColor Green
+Write-Host ''
+Write-Host 'Please close this PowerShell window now' -ForegroundColor Yellow
+Write-Host 'and return to the workshop instructions to continue.' -ForegroundColor Yellow
+Write-Host ''
+Write-Host 'When the instructions tell you to start the server, run:' -ForegroundColor Cyan
+Write-Host "  cd $here" -ForegroundColor Cyan
+Write-Host '  npm run dev' -ForegroundColor Cyan
+Write-Host '=========================================' -ForegroundColor Green
+
 # 14. Clean up environment variable
-Remove-Item Env:PGPASSWORD
+Remove-Item Env:PGPASSWORD -ErrorAction SilentlyContinue
