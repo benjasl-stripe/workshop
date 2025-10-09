@@ -2,13 +2,15 @@
 
 # 1. Set PGPASSWORD for automated operations
 # $env:PGPASSWORD = "<paste_generated_password_here>"
-$env:PGPASSWORD = "ec0ee603649449768360db25f783505e"
+$env:PGPASSWORD = "137c5bc5662e48b0be2e690481c84695"
 
 # 2. Start PostgreSQL service
 refreshenv
+# Add PostgreSQL to PATH
+$env:Path += ";C:\Program Files\PostgreSQL\17\bin"
 
 Write-Host "Starting PostgreSQL service..."
-$services = @("postgresql-x64-14", "postgresql-x64-13", "postgresql-x64-12")
+$services = @("postgresql-x64-17", "postgresql-x64-16", "postgresql-x64-15", "postgresql-x64-14", "postgresql-x64-13", "postgresql-x64-12")
 $started = $false
 foreach ($svc in $services) {
     try {
@@ -55,6 +57,8 @@ Write-Host "PostgreSQL version:"
 Write-Host "Resetting password var"
 $env:PGPASSWORD = "mypassword"
 refreshenv
+# Re-add PostgreSQL to PATH after refreshenv
+$env:Path += ";C:\Program Files\PostgreSQL\17\bin"
 
 
 # 8. Create blank database
@@ -92,12 +96,9 @@ if (-not (Get-Command npm -ErrorAction SilentlyContinue)) {
     refreshenv
 }
 
-# 12. Create Medusa admin user and setup .env
+# 12. Setup .env in medusa-backend
 $medusaDir = "..\medusa-backend"
 Set-Location $medusaDir
-
-Write-Host "Creating Medusa admin user..."
-npx medusa user -e admin@medusajs.com -p supersecret
 
 if (Test-Path ".env.template") {
     if (Test-Path ".env") {
@@ -107,7 +108,11 @@ if (Test-Path ".env.template") {
     Move-Item ".env.template" ".env" -Force
     Write-Host "Renamed .env.template to .env"
 } else {
-    Write-Host "No .env.template found in $medusaDir"
+    if (Test-Path ".env") {
+        Write-Host ".env already exists"
+    } else {
+        Write-Host "No .env.template found in $medusaDir"
+    }
 }
 
 # 13. Install npm dependencies (do not start dev server)
