@@ -1,4 +1,0 @@
-
-chmod +x ./install_postgres.sh
-./install_postgres.sh
-

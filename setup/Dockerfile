@@ -1,18 +1,19 @@
 FROM postgres:16-alpine
 
-# Bootstrap defaults (used only on first init)
+# Bootstrap defaults (first init only)
 ENV POSTGRES_USER=postgres \
     POSTGRES_PASSWORD=postgres \
     POSTGRES_DB=postgres
 
-# App defaults (override at runtime with -e)
+# App defaults (can be overridden at runtime)
 ENV APP_DB_NAME=stripe-ws-db \
     APP_DB_USER=myadmin \
     APP_DB_PASS=mypassword
 
-# Copy your dump(s)
+# Copy dumps
 COPY import/ /docker-entrypoint-initdb.d/import/
 
-# Copy the init script so it runs once on first startup
+# Copy init script, normalize line endings, then make executable
 COPY docker/01_init_app.sh /docker-entrypoint-initdb.d/01_init_app.sh
-RUN chmod +x /docker-entrypoint-initdb.d/01_init_app.sh
+RUN sed -i 's/\r$//' /docker-entrypoint-initdb.d/01_init_app.sh \
+ && chmod +x /docker-entrypoint-initdb.d/01_init_app.sh
